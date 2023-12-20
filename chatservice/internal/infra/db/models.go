@@ -34,7 +34,7 @@ type Message struct {
 	Content   string
 	Tokens    int32
 	Model     string
-	Erased    bool
+	Erased    int32
 	OrderMsg  int32
 	CreatedAt time.Time
 }

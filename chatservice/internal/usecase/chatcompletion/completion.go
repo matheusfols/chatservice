@@ -3,9 +3,10 @@ package chatcompletion
 import (
 	"context"
 	"errors"
+	"fmt"
 
-	"github.com/devfullcycle/fclx/chatservice/internal/domain/entity"
-	"github.com/devfullcycle/fclx/chatservice/internal/domain/gateway"
+	"github.com/matheusfols/chatservice/internal/domain/entity"
+	"github.com/matheusfols/chatservice/internal/domain/gateway"
 	openai "github.com/sashabaranov/go-openai"
 )
 
@@ -52,6 +53,7 @@ func (uc *ChatCompletionUseCase) Execute(ctx context.Context, input ChatCompleti
 	if err != nil {
 		if err.Error() == "chat not found" {
 			chat, err = createNewChat(input)
+			fmt.Println("chat", chat)
 			if err != nil {
 				return nil, errors.New("error creating new chat: " + err.Error())
 			}

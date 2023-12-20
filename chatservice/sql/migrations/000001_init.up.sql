@@ -1,5 +1,5 @@
-START TRANSACTION;
-CREATE TABLE IF NOT EXISTS `chats` (
+BEGIN;
+CREATE TABLE IF NOT EXISTS chats (
     id VARCHAR(36) NOT NULL PRIMARY KEY,
     user_id VARCHAR(36) NOT NULL,
     initial_message_id TEXT NOT NULL,
@@ -18,14 +18,14 @@ CREATE TABLE IF NOT EXISTS `chats` (
     updated_at TIMESTAMP NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS `messages` (
+CREATE TABLE IF NOT EXISTS messages (
     id VARCHAR(36) NOT NULL PRIMARY KEY,
     chat_id VARCHAR(36) NOT NULL,
     role VARCHAR(10) NOT NULL,
     content TEXT NOT NULL,
     tokens SMALLINT NOT NULL,
     model VARCHAR(20) NOT NULL,
-    erased BOOLEAN NOT NULL,
+    erased INT NOT NULL,
     order_msg SMALLINT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     FOREIGN KEY (chat_id) REFERENCES chats (id) ON DELETE CASCADE

@@ -4,14 +4,15 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/devfullcycle/fclx/chatservice/configs"
-	"github.com/devfullcycle/fclx/chatservice/internal/infra/grpc/server"
-	"github.com/devfullcycle/fclx/chatservice/internal/infra/repository"
-	"github.com/devfullcycle/fclx/chatservice/internal/infra/web"
-	"github.com/devfullcycle/fclx/chatservice/internal/infra/web/webserver"
-	"github.com/devfullcycle/fclx/chatservice/internal/usecase/chatcompletion"
-	"github.com/devfullcycle/fclx/chatservice/internal/usecase/chatcompletionstream"
-	_ "github.com/go-sql-driver/mysql"
+	// _ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"
+	"github.com/matheusfols/chatservice/configs"
+	"github.com/matheusfols/chatservice/internal/infra/grpc/server"
+	"github.com/matheusfols/chatservice/internal/infra/repository"
+	"github.com/matheusfols/chatservice/internal/infra/web"
+	"github.com/matheusfols/chatservice/internal/infra/web/webserver"
+	"github.com/matheusfols/chatservice/internal/usecase/chatcompletion"
+	"github.com/matheusfols/chatservice/internal/usecase/chatcompletionstream"
 	"github.com/sashabaranov/go-openai"
 )
 
@@ -21,8 +22,17 @@ func main() {
 		panic(err)
 	}
 
-	conn, err := sql.Open(configs.DBDriver, fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true&multiStatements=true",
-		configs.DBUser, configs.DBPassword, configs.DBHost, configs.DBPort, configs.DBName))
+	url := fmt.Sprintf("postgresql://%v:%v@%v:%v/%v?sslmode=disable",
+		configs.DBUser,
+		configs.DBPassword,
+		configs.DBHost,
+		configs.DBPort,
+		configs.DBName)
+
+	conn, err := sql.Open(configs.DBDriver, url)
+	fmt.Println("Connecting to database...")
+	fmt.Println(conn)
+	fmt.Println(err)
 	if err != nil {
 		panic(err)
 	}

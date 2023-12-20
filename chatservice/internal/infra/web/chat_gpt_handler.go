@@ -2,10 +2,11 @@ package web
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 
-	"github.com/devfullcycle/fclx/chatservice/internal/usecase/chatcompletion"
+	"github.com/matheusfols/chatservice/internal/usecase/chatcompletion"
 )
 
 type WebChatGPTHandler struct {
@@ -53,6 +54,9 @@ func (h *WebChatGPTHandler) Handle(w http.ResponseWriter, r *http.Request) {
 	dto.Config = h.Config
 
 	result, err := h.CompletionUseCase.Execute(r.Context(), dto)
+	fmt.Println(err)
+	fmt.Println(result)
+	fmt.Println("teste")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

@@ -3,9 +3,9 @@ package server
 import (
 	"net"
 
-	"github.com/devfullcycle/fclx/chatservice/internal/infra/grpc/pb"
-	"github.com/devfullcycle/fclx/chatservice/internal/infra/grpc/service"
-	"github.com/devfullcycle/fclx/chatservice/internal/usecase/chatcompletionstream"
+	"github.com/matheusfols/chatservice/internal/infra/grpc/pb"
+	"github.com/matheusfols/chatservice/internal/infra/grpc/service"
+	"github.com/matheusfols/chatservice/internal/usecase/chatcompletionstream"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"

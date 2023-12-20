@@ -2,11 +2,12 @@ version: "2"
 sql:
   - schema: "sql/migrations"
     queries: "sql/queries"
-    engine: "mysql"
+    engine: "postgresql"
     gen:
       go:
         package: "db"
         out: "internal/infra/db"
-        overrides: 
+        sql_package: "pgx/v5"
+        overrides:
           - db_type: "decimal"
             go_type: "float64"

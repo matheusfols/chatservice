@@ -6,8 +6,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com/devfullcycle/fclx/chatservice/internal/domain/entity"
-	"github.com/devfullcycle/fclx/chatservice/internal/infra/db"
+	"github.com/matheusfols/chatservice/internal/domain/entity"
+	"github.com/matheusfols/chatservice/internal/infra/db"
 )
 
 type ChatRepositoryMySQL struct {
@@ -172,7 +172,7 @@ func (r *ChatRepositoryMySQL) SaveChat(ctx context.Context, chat *entity.Chat) e
 				Model:     chat.Config.Model.Name,
 				CreatedAt: message.CreatedAt,
 				OrderMsg:  int32(i),
-				Erased:    false,
+				Erased:    0,
 			},
 		)
 		if err != nil {
@@ -194,7 +194,7 @@ func (r *ChatRepositoryMySQL) SaveChat(ctx context.Context, chat *entity.Chat) e
 				Model:     chat.Config.Model.Name,
 				CreatedAt: message.CreatedAt,
 				OrderMsg:  int32(i),
-				Erased:    true,
+				Erased:    1,
 			},
 		)
 		if err != nil {
